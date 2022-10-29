@@ -1,0 +1,425 @@
+artificial intelligence
+a modern approach
+fourth edition
+
+pearson series
+
+in artificial intelligence
+
+stuart russell and peter norvig, editors
+
+artificial intelligence
+a modern approach
+fourth edition
+
+stuart j. russell and peter norvig
+contributing writers
+
+ming-wei chang
+
+jacob devlin
+
+anca dragan
+
+david forsyth
+
+ian goodfellow
+
+jitendra m. malik
+
+vikash mansinghka
+
+judea pearl
+
+michael wooldridge
+
+copyright  2021, 2010, 2003 by pearson education, inc. or its affiliates, 221 river street,
+hoboken, nj 07030. all rights reserved. manufactured in the united states of america.
+this publication is protected by copyright, and permission should be obtained from the
+publisher prior to any prohibited reproduction, storage in a retrieval system, or transmission
+in any form or by any means, electronic, mechanical, photocopying, recording, or otherwise.
+for information regarding permissions, request forms, and the appropriate contacts within
+the pearson education global rights and permissions department, please visit
+www.pearsoned.com/permissions/.
+
+acknowledgments of third-party content appear on the appropriate page within the text.
+
+cover images
+
+alan turing  science history images/alamy stock photo
+
+statue of aristotle  panos karas/shutterstock
+
+ada lovelace  pictorial press ltd/alamy stock photo
+
+autonomous cars  andrey suslov/shutterstock
+
+atlas robot  boston dynamics, inc.
+
+berkeley campanile and golden gate bridge  ben chu/shutterstock
+
+background ghosted nodes  eugene sergeev/alamy stock photo
+
+chess board with chess figure  titania/shutterstock
+
+mars rover  stocktrek images, inc./alamy stock photo
+
+kasparov  kathy willens/ap images
+
+pearson, always learning is an exclusive trademark owned by pearson education,
+inc. or its affiliates in the u.s. and/or other countries.
+
+unless otherwise indicated herein, any third-party trademarks, logos, or icons that may
+appear in this work are the property of their respective owners, and any references to thirdparty trademarks, logos, icons, or other trade dress are for demonstrative or descriptive
+purposes only. such references are not intended to imply any sponsorship, endorsement,
+authorization, or promotion of pearsons products by the owners of such marks, or any
+relationship between the owner and pearson education, inc., or its affiliates, authors,
+licensees, or distributors.
+
+library of congress cataloging-in-publication data
+
+names russell, stuart j. (stuart jonathan), author.  norvig, peter, author.
+
+title artificial intelligence  a modern approach / stuart j. russell and peter norvig.
+
+description fourth edition.  hoboken  pearson, [2021]  series pearson series in artificial
+intelligence  includes bibliographical references and index.  summary updated edition
+of popular textbook on artificial intelligence. provided by publisher.
+
+identifiers lccn 2019047498  isbn 9780134610993 (hardcover)
+
+subjects lcsh artificial intelligence.
+
+classification lcc q335 .r86 2021  ddc 006.3dc23
+
+lc record available at https//lccn.loc.gov/2019047498
+
+scoutautomatedprintcode
+
+isbn-10
+
+0-13-461099-7
+
+isbn-13 978-0-13-461099-3
+
+for loy, gordon, lucy, george, and isaac  s.j.r.
+
+for kris, isabella, and juliet  p.n.
+
+preface
+artificial intelligence (ai) is a big field, and this is a big book. we have tried to explore the
+full breadth of the field, which encompasses logic, probability, and continuous mathematics
+perception, reasoning, learning, and action fairness, trust, social good, and safety and
+applications that range from microelectronic devices to robotic planetary explorers to online
+services with billions of users.
+
+the subtitle of this book is a modern approach. that means we have chosen to tell the
+story from a current perspective. we synthesize what is now known into a common
+framework, recasting early work using the ideas and terminology that are prevalent today.
+we apologize to those whose subfields are, as a result, less recognizable.
+
+new to this edition
+this edition reflects the changes in ai since the last edition in 2010
+
+we focus more on machine learning rather than hand-crafted knowledge engineering,
+due to the increased availability of data, computing resources, and new algorithms.
+deep learning, probabilistic programming, and multiagent systems receive expanded
+coverage, each with their own chapter.
+the coverage of natural language understanding, robotics, and computer vision has
+been revised to reflect the impact of deep learning.
+the robotics chapter now includes robots that interact with humans and the application
+of reinforcement learning to robotics.
+previously we defined the goal of ai as creating systems that try to maximize expected
+utility, where the specific utility informationthe objectiveis supplied by the human
+designers of the system. now we no longer assume that the objective is fixed and
+known by the ai system instead, the system may be uncertain about the true objectives
+of the humans on whose behalf it operates. it must learn what to maximize and must
+function appropriately even while uncertain about the objective.
+
+we increase coverage of the impact of ai on society, including the vital issues of ethics,
+fairness, trust, and safety.
+we have moved the exercises from the end of each chapter to an online site. this allows
+us to continuously add to, update, and improve the exercises, to meet the needs of
+instructors and to reflect advances in the field and in ai-related software tools.
+overall, about 25% of the material in the book is brand new. the remaining 75% has
+been largely rewritten to present a more unified picture of the field. 22% of the citations
+in this edition are to works published after 2010.
+
+overview of the book
+the main unifying theme is the idea of an intelligent agent. we define ai as the study of
+agents that receive percepts from the environment and perform actions. each such agent
+implements a function that maps percept sequences to actions, and we cover different ways
+to represent these functions, such as reactive agents, real-time planners, decision-theoretic
+systems, and deep learning systems. we emphasize learning both as a construction method
+for competent systems and as a way of extending the reach of the designer into unknown
+environments. we treat robotics and vision not as independently defined problems, but as
+occurring in the service of achieving goals. we stress the importance of the task
+environment in determining the appropriate agent design.
+
+our primary aim is to convey the ideas that have emerged over the past seventy years of ai
+research and the past two millennia of related work. we have tried to avoid excessive
+formality in the presentation of these ideas, while retaining precision. we have included
+mathematical formulas and pseudocode algorithms to make the key ideas concrete
+mathematical concepts and notation are described in appendix a  and our pseudocode is
+described in appendix b .
+
+this book is primarily intended for use in an undergraduate course or course sequence. the
+book has 28 chapters, each requiring about a weeks worth of lectures, so working through
+the whole book requires a two-semester sequence. a one-semester course can use selected
+chapters to suit the interests of the instructor and students. the book can also be used in a
+graduate-level course (perhaps with the addition of some of the primary sources suggested
+in the bibliographical notes), or for self-study or as a reference.
+
+throughout the book, important points are marked with a triangle icon in the margin.
+wherever a new term is defined, it is also noted in the margin. subsequent significant uses
+of the term are in bold, but not in the margin. we have included a comprehensive index and
+an extensive bibliography.
+
+term
+
+the only prerequisite is familiarity with basic concepts of computer science (algorithms,
+data structures, complexity) at a sophomore level. freshman calculus and linear algebra are
+useful for some of the topics.
+
+online resources
+online resources are available through pearsonhighered.com/cs-resources or at the
+books web site, aima.cs.berkeley.edu. there you will find
+exercises, programming projects, and research projects. these are no longer at the end
+of each chapter they are online only. within the book, we refer to an online exercise
+with a name like exercise 6.nary. instructions on the web site allow you to find
+exercises by name or by topic.
+implementations of the algorithms in the book in python, java, and other programming
+languages (currently hosted at github.com/aimacode).
+a list of over 1400 schools that have used the book, many with links to online course
+materials and syllabi.
+supplementary material and links for students and instructors.
+instructions on how to report errors in the book, in the likely event that some exist.
+
+book cover
+the cover depicts the final position from the decisive game 6 of the 1997 chess match in
+which the program deep blue defeated garry kasparov (playing black), making this the first
+
+time a computer had beaten a world champion in a chess match. kasparov is shown at the
+top. to his right is a pivotal position from the second game of the historic go match
+between former world champion lee sedol and deepminds alphago program. move 37 by
+alphago violated centuries of go orthodoxy and was immediately seen by human experts as
+an embarrassing mistake, but it turned out to be a winning move. at top left is an atlas
+humanoid robot built by boston dynamics. a depiction of a self-driving car sensing its
+environment appears between ada lovelace, the worlds first computer programmer, and
+alan turing, whose fundamental work defined artificial intelligence. at the bottom of the
+chess board are a mars exploration rover robot and a statue of aristotle, who pioneered the
+study of logic his planning algorithm from de motu animalium appears behind the authors
+names. behind the chess board is a probabilistic programming model used by the un
+comprehensive nuclear-test-ban treaty organization for detecting nuclear explosions
+from seismic signals.
+
+acknowledgments
+it takes a global village to make a book. over 600 people read parts of the book and made
+suggestions for improvement. the complete list is at aima.cs.berkeley.edu/ack.html
+we are grateful to all of them. we have space here to mention only a few especially
+important contributors. first the contributing writers
+judea pearl (section 13.5 , causal networks)
+vikash mansinghka (section 15.3 , programs as probability models)
+michael wooldridge (chapter 18 , multiagent decision making)
+ian goodfellow (chapter 21 , deep learning)
+jacob devlin and mei-wing chang (chapter 24 , deep learning for natural
+language)
+jitendra malik and david forsyth (chapter 25 , computer vision)
+anca dragan (chapter 26 , robotics).
+
+then some key roles
+
+cynthia yeung and malika cantor (project management)
+julie sussman and tom galloway (copyediting and writing suggestions)
+
+omari stephens (illustrations)
+tracy johnson (editor)
+erin ault and rose kernan (cover and color conversion)
+nalin chhibber, sam goto, raymond de lacaze, ravi mohan, ciaran oreilly, amit
+patel, dragomir radiv, and samagra sharma (online code development and mentoring)
+google summer of code students (online code development).
+
+stuart would like to thank his wife, loy sheflott, for her endless patience and boundless
+wisdom. he hopes that gordon, lucy, george, and isaac will soon be reading this book after
+they have forgiven him for working so long on it. rugs (russells unusual group of
+students) have been unusually helpful, as always.
+
+peter would like to thank his parents (torsten and gerda) for getting him started, and his
+wife (kris), children (bella and juliet), colleagues, boss, and friends for encouraging and
+tolerating him through the long hours of writing and rewriting.
+
+about the authors
+stuart russell was born in 1962 in portsmouth, england. he received his b.a. with
+first-class honours in physics from oxford university in 1982, and his ph.d. in computer
+science from stanford in 1986. he then joined the faculty of the university of california at
+berkeley, where he is a professor and former chair of computer science, director of the
+center for human-compatible ai, and holder of the smithzadeh chair in engineering. in
+1990, he received the presidential young investigator award of the national science
+foundation, and in 1995 he was cowinner of the computers and thought award. he is a
+fellow of the american association for artificial intelligence, the association for computing
+machinery, and the american association for the advancement of science, an honorary
+fellow of wadham college, oxford, and an andrew carnegie fellow. he held the chaire
+blaise pascal in paris from 2012 to 2014. he has published over 300 papers on a wide range
+of topics in artificial intelligence. his other books include the use of knowledge in analogy and
+induction, do the right thing studies in limited rationality (with eric wefald), and human
+compatible artificial intelligence and the problem of control.
+
+peter norvig is currently a director of research at google, inc., and was previously the
+director responsible for the core web search algorithms. he co-taught an online ai class
+that signed up 160,000 students, helping to kick off the current round of massive open
+online classes. he was head of the computational sciences division at nasa ames
+research center, overseeing research and development in artificial intelligence and
+robotics. he received a b.s. in applied mathematics from brown university and a ph.d. in
+computer science from berkeley. he has been a professor at the university of southern
+california and a faculty member at berkeley and stanford. he is a fellow of the american
+association for artificial intelligence, the association for computing machinery, the
+american academy of arts and sciences, and the california academy of science. his other
+books are paradigms of ai programming case studies in common lisp, verbmobil a translation
+system for face-to-face dialog, and intelligent help systems for unix.
+
+the two authors shared the inaugural aaai/eaai outstanding educator award in 2016.
+
+contents
+i artificial intelligence 
+1 introduction 1 
+1.1 what is ai 1 
+1.2 the foundations of artificial intelligence 5 
+1.3 the history of artificial intelligence 17 
+1.4 the state of the art 27 
+1.5 risks and benefits of ai 31 
+summary 34 
+bibliographical and historical notes 35 
+2 intelligent agents 36 
+2.1 agents and environments 36 
+2.2 good behavior the concept of rationality 39 
+2.3 the nature of environments 42 
+2.4 the structure of agents 47 
+summary 60 
+bibliographical and historical notes 60 
+ii problem-solving 
+3 solving problems by searching 63 
+3.1 problem-solving agents 63 
+3.2 example problems 66 
+3.3 search algorithms 71 
+3.4 uninformed search strategies 76 
+3.5 informed (heuristic) search strategies 84 
+
+3.6 heuristic functions 97 
+summary 104 
+bibliographical and historical notes 106 
+4 search in complex environments 110 
+4.1 local search and optimization problems 110 
+4.2 local search in continuous spaces 119 
+4.3 search with nondeterministic actions 122 
+4.4 search in partially observable environments 126 
+4.5 online search agents and unknown environments 134 
+summary 141 
+bibliographical and historical notes 142 
+5 adversarial search and games 146 
+5.1 game theory 146 
+5.2 optimal decisions in games 148 
+5.3 heuristic alphabeta tree search 156 
+5.4 monte carlo tree search 161 
+5.5 stochastic games 164 
+5.6 partially observable games 168 
+5.7 limitations of game search algorithms 173 
+summary 174 
+bibliographical and historical notes 175 
+6 constraint satisfaction problems 180 
+6.1 defining constraint satisfaction problems 180 
+6.2 constraint propagation inference in csps 185 
+6.3 backtracking search for csps 191 
+
+6.4 local search for csps 197 
+6.5 the structure of problems 199 
+summary 203 
+bibliographical and historical notes 204 
+iii knowledge, reasoning, and planning 
+7 logical agents 208 
+7.1 knowledge-based agents 209 
+7.2 the wumpus world 210 
+7.3 logic 214 
+7.4 propositional logic a very simple logic 217 
+7.5 propositional theorem proving 222 
+7.6 effective propositional model checking 232 
+7.7 agents based on propositional logic 237 
+summary 246 
+bibliographical and historical notes 247 
+8 first-order logic 251 
+8.1 representation revisited 251 
+8.2 syntax and semantics of first-order logic 256 
+8.3 using first-order logic 265 
+8.4 knowledge engineering in first-order logic 271 
+summary 277 
+bibliographical and historical notes 278 
+9 inference in first-order logic 280 
+9.1 propositional vs. first-order inference 280 
+9.2 unification and first-order inference 282 
+
+9.3 forward chaining 286 
+9.4 backward chaining 293 
+9.5 resolution 298 
+summary 309 
+bibliographical and historical notes 310 
+10 knowledge representation 314 
+10.1 ontological engineering 314 
+10.2 categories and objects 317 
+10.3 events 322 
+10.4 mental objects and modal logic 326 
+10.5 reasoning systems for categories 329 
+10.6 reasoning with default information 333 
+summary 337 
+bibliographical and historical notes 338 
+11 automated planning 344 
+11.1 definition of classical planning 344 
+11.2 algorithms for classical planning 348 
+11.3 heuristics for planning 353 
+11.4 hierarchical planning 356 
+11.5 planning and acting in nondeterministic domains 365 
+11.6 time, schedules, and resources 374 
+11.7 analysis of planning approaches 378 
+summary 379 
+bibliographical and historical notes 380 
+
+iv uncertain knowledge and reasoning 
+12 quantifying uncertainty 385 
+12.1 acting under uncertainty 385 
+12.2 basic probability notation 388 
+12.3 inference using full joint distributions 395 
+12.4 independence 397 
+12.5 bayes rule and its use 399 
+12.6 naive bayes models 402 
+12.7 the wumpus world revisited 404 
+summary 407 
+bibliographical and historical notes 408 
+13 probabilistic reasoning 412 
+13.1 representing knowledge in an uncertain domain 412 
+13.2 the semantics of bayesian networks 414 
+13.3 exact inference in bayesian networks 427 
+13.4 approximate inference for bayesian networks 435 
+13.5 causal networks 449 
+summary 453 
+bibliographical and historical notes 454 
+14 probabilistic reasoning over time 461 
+14.1 time and uncertainty 461 
+14.2 inference in temporal models 465 
+14.3 hidden markov models 473 
+14.4 kalman filters 479 
+14.5 dynamic bayesian networks 485 
+
+summary 496 
+bibliographical and historical notes 497 
+15 probabilistic programming 500 
+15.1 relational probability models 501 
+15.2 open-universe probability models 507 
+15.3 keeping track of a complex world 514 
+15.4 programs as probability models 519 
+summary 523 
+bibliographical and historical notes 524 
+16 making simple decisions 528 
+16.1 combining beliefs and desires under uncertainty 528 
+16.2 the basis of utility theory 529 
+16.3 utility functions 532 
+
+([dfwe*])
+i'm ishaan
