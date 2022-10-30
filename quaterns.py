@@ -18,8 +18,8 @@ nltk.download('averaged_perceptron_tagger')
 #--------------------------------------------------------------------------------------------------------------
 
 #absolute file paths of our book's text file
-file_path="C:/Users/lenovo/OneDrive/Desktop/NLP-Project-1/aitest.txt"
-clean_file_path="C:/Users/lenovo/OneDrive/Desktop/NLP-Project-1/aiclean.txt"
+file_path="C:/Users/lenovo/OneDrive/Desktop/NLP-Project-1/cs.txt"
+clean_file_path="C:/Users/lenovo/OneDrive/Desktop/NLP-Project-1/csclean.txt"
 text_file=open(file_path,'r',encoding='utf-8')
 
 #data of txt file is extracted into string
@@ -55,7 +55,6 @@ for token in tokens:
 print("Preprocessed tokens")
 print(new_review)
 tokens=new_review
-
 
 #removing stopwords
 #stopwords are, frequent letters/words of english alphabet, punctuations and digits
@@ -109,4 +108,17 @@ plt.xlabel("tokens")
 plt.ylabel("frequency")
 plt.title("Bar plot of Frequency distribution")
 plt.show()
+
+#histogram : frequency vs tokens(wordLength)
+def plotHistogram(freq, title, x_label, y_label):
+    bin_size=np.linspace(0,16)
+    plt.hist(freq, bins=bin_size)
+    plt.xlabel(x_label)
+    plt.ylabel(y_label)
+    plt.title(title)
+    plt.show()
+
+t1WordLength = [len(s) for s in tokens]
+plotHistogram(t1WordLength, 'Word Length and frequency for Understanding Cryptography by Christof Paar ', 'word length', 'frequency')
+
 
