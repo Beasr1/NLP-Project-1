@@ -121,4 +121,3 @@ def plotHistogram(freq, title, x_label, y_label):
 t1WordLength = [len(s) for s in tokens]
 plotHistogram(t1WordLength, 'Word Length and frequency for Understanding Cryptography by Christof Paar ', 'word length', 'frequency')
 
-

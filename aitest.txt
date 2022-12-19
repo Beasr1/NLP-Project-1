@@ -29,6 +29,11 @@ Jitendra M. Malik
 
 Vikash Mansinghka
 
+des is synonym of DataEncryptionStandard.
+trng is synonym of TrueRandomNumberGenerators.
+AdvancedEncryptionStandard is an alternative to des.
+aes is synonym of AdvancedEncryptionStandard.
+
 Judea Pearl
 
 Michael Wooldridge

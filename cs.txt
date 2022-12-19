@@ -56,6 +56,27 @@ While writing this book we noticed that for some reason the names of our spouses
 and children are limited to five letters. As far as we know, this has no cryptographic
 relevance.
 
+des.
+trng.
+
+Des is synonym of DataEncryptionStandard.
+trng is synonym of TrueRandomNumberGenerators.
+
+AdvancedEncryptionStandard is an alternative to Des.
+
+Aes is alternative to Des.
+
+aes is synonym of AdvancedEncryptionStandard.
+
+DSA is synonym of DataStructuresAlgorithms.
+DataStructuresAlgorithms is synonym of DSA.
+
+TRNG is synonym of TrueRandomNumberGenerators.
+
+AdvancedEncryptionStandard is an alternative to des.
+
+aes is synonym of AdvancedEncryptionStandard.
+
 Foreword
 
 Academic research in cryptology started in the mid-1970s; today it is a mature research discipline with an established professional organization (IACR, International
@@ -2221,11 +2242,9 @@ random bits. Since standard PCs do not have TRNG, this requirement might not be
 that convenient but can certainly be met. The second requirement means that Alice
 has to get the random bits securely to Bob. In practice that could mean that Alice
 burns the true random bits on a CD ROM and sends them securely, e.g., with a
-trusted courier, to Bob. Still doable, but not great. The third requirement is probably
+trusted courier, to Bob. Still doable, but not great. The third requirement is probably Stream Ciphers.
 
-38
-
-2 Stream Ciphers
+Stream Ciphers
 
 the most impractical one: Key stream bits cannot be re-used. This implies that we
 need one key bit for every bit of plaintext. Hence, our key is as long as the plaintext!
@@ -16329,7 +16348,7 @@ RSA is currently the most widely used digital signature algorithm. Competitors
 are the Digital Signature Standard (DSA) and the Elliptic Curve Digital Signature
 Standard (ECDSA).
 The Elgamal signature scheme is the basis for DSA. In turn, ECDSA is a generalization of DSA to elliptic curves.
-RSA verification can be done with short public keys e. Hence, in practice, RSA
+RSA verification can be done with short public keys. Hence, in practice, RSA
 verification is usually faster than signing.
 DSA and ECDSA have the advantage over RSA in that the signatures are much
 shorter.

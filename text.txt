@@ -1,0 +1,19 @@
+des.
+trng.
+
+
+AdvancedEncryptionStandard is an alternative to Des.
+
+Aes is alternative to DatasetEncryptionStandard.
+
+aes is acronymn of AdvancedEncryptionStandard.
+
+DSA is acronymn of DataStructuresAlgorithms.
+
+TRNG is acronymn of TrueRandomNumberGenerators.
+
+AdvancedEncryptionStandard is an alternative to des.
+
+aes is acronymn of AdvancedEncryptionStandard.
+
+PublickeyCryptography is synonymn of AsymmetricCryptography.

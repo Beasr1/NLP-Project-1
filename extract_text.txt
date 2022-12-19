@@ -1,0 +1,242 @@
+1.2.2 Simple Symmetric Encryption: The Substitution Cipher
+We will now learn one of the simplest methods for encrypting text, the substitution
+(= replacement) cipher. Historically this type of cipher has been used many times,
+and it is a good illustration of basic cryptography. We will use the substitution cipher
+for learning some important facts about key lengths and about different ways of
+attacking ciphers.
+The goal of the substitution cipher is the encryption of text (as opposed to bits
+in modern digital systems). The idea is very simple: We substitute each letter of the
+alphabet with another one.
+
+1.2 Symmetric Cryptography
+
+We assume that we choose the substitution table completely randomly, so that
+an attacker is not able to guess it. Note that the substitution table is the key of this
+cryptosystem. As always in symmetric cryptography, the key has to be distributed
+between Alice and Bob in a secure fashion.
+Let’s look at another ciphertext:
+This does not seem to make too much sense and looks like decent cryptography.
+However, the substitution cipher is not secure at all! Let’s look at ways of breaking
+the cipher.
+
+First Attack: Brute-Force or Exhaustive Key Search
+Brute-force attacks are based on a simple concept: Oscar, the attacker, has the ciphertext from eavesdropping on the channel and happens to have a short piece of
+plaintext, e.g., the header of a file that was encrypted. Oscar now simply decrypts
+the first piece of ciphertext with all possible keys. Again, the key for this cipher is
+the substitution table. If the resulting plaintext matches the short piece of plaintext,
+he knows that he has found the correct key.
+
+If the equality holds, a possible correct key is found; if not, proceed
+with the next key.
+
+In practice, a brute-force attack can be more complicated because incorrect keys
+can give false positive results. We will address this issue.
+It is important to note that a brute-force attack against symmetric ciphers is always possible in principle. Whether it is feasible in practice depends on the key
+space, on the number of possible keys that exist for a given cipher. If testing all
+the keys on many modern computers takes too much time, i.e., several decades, the
+cipher is computationally secure against a brute-force attack.
+
+
+1 Introduction to Cryptography and Data Security
+
+Let’s determine the key space of the substitution cipher: When choosing the replacement for the first letter A, we randomly choose one letter from the 26 letters of
+the alphabet (in the example above we chose k). The replacement for the next alphabet letter B was randomly chosen from the remaining 25 letters, etc. Thus there
+exist the following number of different substitution tables:
+Even with hundreds of thousands of high-end PCs such a search would take
+several decades! Thus, we are tempted to conclude that the substitution cipher is
+secure. But this is incorrect because there is another, more powerful attack.
+
+Second Attack: Letter Frequency Analysis
+First we note that the brute-force attack from above treats the cipher as a black box,
+i.e., we do not analyze the internal structure of the cipher. The substitution cipher
+can easily be broken by such an analytical attack.
+The major weakness of the cipher is that each plaintext symbol always maps to
+the same ciphertext symbol. That means that the statistical properties of the plaintext
+are preserved in the ciphertext. If we go back to the second example we observe that
+the letter q occurs most frequently in the text. From this we know that q must be the
+substitution for one of the frequent letters in the English language.
+For practical attacks, the following properties of language can be exploited:
+1. Determine the frequency of every ciphertext letter. The frequency distribution,
+often even of relatively short pieces of encrypted text, will be close to that of
+the given language in general. In particular, the most frequent letters can often
+easily be spotted in ciphertexts. For instance, in English E is the most frequent
+letter (about 13%), T is the second most frequent letter (about 9%), A is the third
+most frequent letter (about 8%), and so on. Table 1.1 lists the letter frequency
+distribution of English.
+2. The method above can be generalized by looking at pairs or triples, or quadruples, and so on of ciphertext symbols. For instance, in English (and some other
+European languages), the letter Q is almost always followed by a letter U. This behavior
+can be exploited to detect the substitution of the letter Q and the letter U.
+3. If we assume that word separators (blanks) have been found (which is only sometimes the case), one can often detect frequent short words such as THE, AND, etc.
+Once we have identified one of these words, we immediately know three letters
+(or whatever the length of the word is) for the entire text.
+In practice, the three techniques listed above are often combined to break substitution ciphers.
+Example 1.3. If we analyze the encrypted text from Example 1.2, we obtain:
+WE WILL MEET IN THE MIDDLE OF THE LIBRARY AT NOON
+ALL ARRANGEMENTS ARE MADE
+
+1.3 Cryptanalysis
+
+Lesson learned Good ciphers should hide the statistical properties of the encrypted
+plaintext. The ciphertext symbols should appear to be random. Also, a large key
+space alone is not sufficient for a strong encryption function.
+
+Cryptanalysis
+This section deals with recommended key lengths of symmetric ciphers and different ways of attacking crypto algorithms. It is stressed that a cipher should be secure
+even if the attacker knows the details of the algorithm.
+
+General Thoughts on Breaking Cryptosystems
+If we ask someone with some technical background what breaking ciphers is about,
+he/she will most likely say that code breaking has to do with heavy mathematics,
+smart people and large computers. We have images in mind of the British code
+breakers during World War II, attacking the German Enigma cipher with extremely
+smart mathematicians (the famous computer scientist Alan Turing headed the efforts) and room-sized electro-mechanical computers. However, in practice there are
+also other methods of code breaking. Let’s look at different ways of breaking cryptosystems in the real world (Fig. 1.6).
+
+Overview of cryptanalysis
+
+Classical Cryptanalysis
+Classical cryptanalysis is understood as the science of recovering the plaintext x
+from the ciphertext y, or, alternatively, recovering the key k from the ciphertext y.
+We recall from the earlier discussion that cryptanalysis can be divided into analytical attacks, which exploit the internal structure of the encryption method, and
+brute-force attacks, which treat the encryption algorithm as a black box and test all
+possible keys.
+
+Implementation Attacks
+Side-channel analysis can be used to obtain a secret key, for instance, by measuring
+the electrical power consumption of a processor which operates on the secret key.
+The power trace can then be used to recover the key by applying signal processing
+techniques. In addition to power consumption, electromagnetic radiation or the runtime behavior of algorithms can give information about the secret key and are, thus,
+useful side channels. implementation attacks are mostly relevant
+against cryptosystems to which an attacker has physical access, such as smart cards.
+In most Internet-based attacks against remote systems, implementation attacks are
+usually not a concern.
+
+Social Engineering Attacks
+Bribing, blackmailing, tricking or classical espionage can be used to obtain a secret
+key by involving humans. For instance, forcing someone to reveal his/her secret key,
+e.g., by holding a gun to his/her head can be quite successful. Another, less violent,
+attack is to call people whom we want to attack on the phone, and say: “This is
+2 Before you switch on the digital oscilloscope in your lab in order to reload your Geldkarte (the
+Geldkarte is the electronic wallet function integrated in most German bank cards) to the maximum
+amount of e 200: Modern smart cards have built-in countermeasures against side channel attacks
+and are very hard to break.
+
+1.3 Cryptanalysis
+
+11
+
+the IT department of your company. For important software updates we need your
+password”. It is always surprising how many people are naı̈ve enough to actually
+give out their passwords in such situations.
+This list of attacks against cryptographic system is certainly not exhaustive. For
+instance, buffer overflow attacks or malware can also reveal secret keys in software
+systems. You might think that many of these attacks, especially social engineering
+and implementation attacks, are “unfair,” but there is little fairness in real-world
+cryptography. If people want to break your IT system, they are already breaking the
+rules and are, thus, unfair. The major point to learn here is:
+An attacker always looks for the weakest link in your cryptosystem. That
+means we have to choose strong algorithms and we have to make sure that
+social engineering and implementation attacks are not practical.
+Even though both implementation attacks and social engineering attacks can be
+quite powerful in practice, this book mainly assumes attacks based on mathematical
+cryptanalysis.
+Solid cryptosystems should adhere to Kerckhoffs’ Principle, postulated by Auguste Kerckhoffs in 1883:
+Definition 1.3.1 Kerckhoffs’ Principle
+A cryptosystem should be secure even if the attacker (Oscar) knows
+all details about the system, with the exception of the secret key. In
+particular, the system should be secure when the attacker knows the
+encryption and decryption algorithms.
+Important Remark: Kerckhoffs’ Principle is counterintuitive! It is extremely tempting to design a system which appears to be more secure because we keep the details
+hidden. This is called security by obscurity. However, experience and military history has shown time and again that such systems are almost always weak, and they
+are very often broken easily as soon as the secret design has been reverse-engineered
+or leaked out through other means. An example is the Content Scrambling System
+(CSS) for DVD content protection, which was broken easily once it was reverseengineered. This is why a cryptographic scheme must remain secure even if its description becomes available to an attacker.
+
+Modular Arithmetic and More Historical Ciphers
+In this section we use two historical ciphers to introduce modular arithmetic with
+integers. Even though the historical ciphers are no longer relevant, modular arithmetic is extremely important in modern cryptography, especially for asymmetric
+algorithms. Ancient ciphers date back to Egypt, where substitution ciphers were
+used. A very popular special case of the substitution cipher is the Caesar cipher,
+which is said to have been used by Julius Caesar to communicate with his army.
+The Caesar cipher simply shifts the letters in the alphabet by a constant number of
+steps. When the end of the alphabet is reached, the letters repeat in a cyclic way,
+similar to numbers in modular arithmetic.
+To make computations with letters more practicable, we can assign each letter of
+the alphabet a number. By doing so, an encryption with the Caesar cipher simply
+becomes a (modular) addition with a fixed value. Instead of just adding constants,
+a multiplication with a constant can be applied as well. This leads us to the affine
+cipher.
+Both the Caesar cipher and the affine cipher will now be discussed in more detail.
+
+Each individual relation is a linear equation modulo 2 with two unknowns. They
+are impossible to solve. If the attacker knows the value for y0 (0 or 1), he cannot
+determine the value of x0 . In fact, the solutions x0 = 0 and x0 = 1 are exactly equally
+likely if s0 stems from a truly random source and there is 50% chance that it has the
+value 0 and 1. The situation is identical for the second equation and all subsequent
+ones. Note that the situation is different if the values si are not truly random. In this
+case, there is some functional relationship between them, and the equations shown
+above are not independent. Even though it might still be hard to solve the system of
+equations, it is not provably secure!
+So, now we have a simple cipher which is perfectly secure. There are rumors
+that the red telephone between the White House and the Kremlin was encrypted
+using an OTP during the Cold War. Obviously there must be a catch since OTPs are
+not used for Web browsers, e-mail encryption, smart cards, mobile phones, or other
+important applications. Let’s look at the implications of the three requirements in
+Defintion 2.2.2. The first requirement means that we need a TRNG. That means we
+need a device, e.g., based on white noise of a semiconductor, that generates truly
+random bits. Since standard PCs do not have TRNG, this requirement might not be
+that convenient but can certainly be met. The second requirement means that Alice
+has to get the random bits securely to Bob. In practice that could mean that Alice
+burns the true random bits on a CD ROM and sends them securely, e.g., with a
+trusted courier, to Bob. Still doable, but not great. The third requirement is probably Stream Ciphers.
+
+Stream Ciphers
+
+the most impractical one: Key stream bits cannot be re-used. This implies that we
+need one key bit for every bit of plaintext. Hence, our key is as long as the plaintext!
+This is probably the major drawback of the OTP. Even if Alice and Bob share a CD
+with 1 MByte of true random numbers, we run quickly into limits. If they send a
+single email with an attachment of 1 MByte, they could encrypt and decrypt it, but
+after that they would need to exchange a true random key stream again.
+For these reasons OTPs are rarely used in practice. However, they give us a great
+design idea for secure ciphers: If we XOR truly random bits and plaintext, we get
+ciphertext that can certainly not be broken by an attacker. We will see in the next
+section how we can use this fact to build practical stream ciphers.
+
+
+
+Shift Register-Based Stream Ciphers
+
+The Elliptic Curve Digital Signature Algorithm (ECDSA)
+As discussed in Chap. 9, elliptic curves have several advantages over RSA and
+over DL schemes like Elgamal or DSA. In particular, in absence of strong attacks
+against elliptic curve cryptosystems (ECC), bit lengths in the range of 160–256 bit
+can be chosen which provide security equivalent to 1024–3072-bit RSA and DL
+schemes. The shorter bit length of ECC often results in shorter processing time and
+in shorter signatures. For these reasons, the Elliptic Curve Digital Signature Algorithm (ECDSA) was standardized in the US by the American National Standards
+Institute (ANSI) in 1998.
+
+Electronic Signatures in Global and National Commerce Act, United States of America
+
+Digital signatures provide message integrity, message authentication and nonrepudiation.
+One of the main application areas of digital signatures is certificates.
+RSA is currently the most widely used digital signature algorithm. Competitors
+are the Digital Signature Standard (DSA) and the Elliptic Curve Digital Signature
+Standard (ECDSA).
+The Elgamal signature scheme is the basis for DSA. In turn, ECDSA is a generalization of DSA to elliptic curves.
+RSA verification can be done with short public keys. Hence, in practice, RSA
+verification is usually faster than signing.
+DSA and ECDSA have the advantage over RSA in that the signatures are much
+shorter.
+In order to prevent certain attacks, RSA should be used with padding.
+The modulus of DSA and the RSA signature schemes should be at least 1024bits long. For true long-term security, a modulus of length 3072 bits should be
+chosen. In contrast, ECDSA achieves the same security levels with bit lengths in
+the range 160–256 bits.
+
+
+In the absence of analytical attacks, the maximum collision resistance of SHA0 and SHA-1 is about 280 , which is not a good fit if they are used in protocols
+together with algorithms such as AES, which has a security level of 128–256 bits.
+Similarly, most public-key schemes can offer higher security levels, for instance,
+elliptic curves can have security levels of 128 bits if 256 bits curves are used. its potential weakness—the most widely deployed hash function.
+At this point we would like to note that finding a collision does not necessarily
+mean that the hash function is insecure in every situation. There are many applications for hash functions, e.g., key derivation or storage of passwords, where only
